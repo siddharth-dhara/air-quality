@@ -7,6 +7,7 @@ Below you will find some information about the project and on how to perform com
 - [About project](#about-project)
 - [Features vs Time Taken](#features-vs-time-taken)
 - [TODO](#todo)
+  - [Unused/Extra Code](#unused-code)
 - [Dependencies](#dependencies)
 - [Folder Structure](#folder-structure)
 - [Available Scripts](#available-scripts)
@@ -50,6 +51,10 @@ To achieve above features in the stated duration we have used following open sou
 - "@material-ui/core": "^4.11.4"
 - "@material-ui/icons": "^4.11.2"
 - "react-sparklines": "^1.7.0"
+
+### Unused/Extra Code
+
+As per of progressive development there are a few components/files created for POC. Those files are still under `./src/` folder and they are not being used anywhere in the code. We will be removing those files in future releases.
 
 ## Updating to New Releases
 
