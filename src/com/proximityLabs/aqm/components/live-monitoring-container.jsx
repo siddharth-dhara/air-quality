@@ -28,16 +28,18 @@ const getCityRows = (data) =>
 
 export const LiveMonitoring = ({
   status,
-  data
+  data,
+  closeWebsocket,
 }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [websocketStatus, setWebsocketStatus] = React.useState('Close');
 
   /**
    * This will render 2 menu items 
    * - pause the web socket listening
    * - open modal for legends
-   * @returns <Menu> - material UI Menu component
+   * @returns <Menu> - material-ui menu component
    */
   const renderMenu = () => {
     return (
@@ -48,7 +50,7 @@ export const LiveMonitoring = ({
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>Pause Websocket</MenuItem>
+        <MenuItem onClick={handleCloseWebsocket}>{websocketStatus} Websocket</MenuItem>
         <MenuItem onClick={openLegendModal}>Legends</MenuItem>
       </Menu>
     );
@@ -61,17 +63,33 @@ export const LiveMonitoring = ({
   const legendRef = useRef();
 
   /**
-     * Handles Mouse Click for opening Menu
+     * Handles Mouse Click for opening menu
      * @param {MouseEvent} event 
      */
   const handleClick = (event) => {
+    // open the menu
     setAnchorEl(event.currentTarget);
   };
 
   /**
-   * Handles and manage closing of the Menu
+   * Handles and manage closing of the menu
+   * This has been implemented so that user can do in depth analysis of particular city's data,
+   * because it is rapidly changing.
+   */
+  const handleCloseWebsocket = () => {
+    // alter the state value(websocketStatus)
+    setWebsocketStatus(websocketStatus === 'Close' ? 'Start' : 'Close');
+    // close/start the websocket based on 'websocketStatus'
+    closeWebsocket(websocketStatus === 'Close');
+    // close the menu
+    handleClose();
+  };
+
+  /**
+   * Handles closing of menu
    */
   const handleClose = () => {
+    // close the menu
     setAnchorEl(null);
   };
 

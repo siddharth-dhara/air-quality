@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       width: '100%',
-      margin: '10px 10px 100px 10px',
+      margin: '10px 100px 10px 10px',
     },
     expand: {
       transform: 'rotate(0deg)',

@@ -4,7 +4,16 @@ import LiveMonitoring from '../components/live-monitoring-container';
 
 export const WebSocket = () => {
   // Public API that will receives the response for the air quality
-  const [socketUrl] = useState('ws://city-ws.herokuapp.com/');
+  const [socketUrl, setSocketUrl] = useState('ws://city-ws.herokuapp.com/');
+
+  /**
+   * Using the 3rd argument this handler closes the Websocket connection.
+   * 
+   * @param {Bool} shouldConnect 
+   * @returns 
+   */
+  const _closeWebsocket = (shouldConnect) =>
+    useWebSocket('wss://demos.kaazing.com/echo', [], shouldConnect);
 
   const {
     lastMessage,
@@ -22,6 +31,9 @@ export const WebSocket = () => {
   const status = connectionStatus === 'Open' ? 'connected' : 'disconnected';
 
   return (
-    <LiveMonitoring status={status} data={lastMessage ? lastMessage.data : null} />
+    <LiveMonitoring
+      status={status}
+      data={lastMessage ? lastMessage.data : null}
+      closeWebsocket={_closeWebsocket}/>
   );
 };
