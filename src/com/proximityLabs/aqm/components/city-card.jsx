@@ -18,11 +18,7 @@ const useStyles = makeStyles((theme) =>
   createStyles({
     root: {
       width: '100%',
-      margin: '10px 10px 10px 10px',
-    },
-    media: {
-      height: 0,
-      paddingTop: '56.25%', // 16:9
+      margin: '10px 10px 100px 10px',
     },
     expand: {
       transform: 'rotate(0deg)',
@@ -33,6 +29,9 @@ const useStyles = makeStyles((theme) =>
     },
     expandOpen: {
       transform: 'rotate(180deg)',
+    },
+    expandedContent: {
+      maxHeight: '100px',
     },
   }),
 );
@@ -60,7 +59,7 @@ const CityCard = ({
         subheader={level.toUpperCase()}
       />
       <CardContent>
-        <Typography variant="body2" color="textSecondary" component="p">
+        <Typography variant="body2" color="textSecondary" component={'span'}>
           {healthImplication}
         </Typography>
       </CardContent>
@@ -75,9 +74,9 @@ const CityCard = ({
         </IconButton>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-          <Typography paragraph>Precaution:</Typography>
-          <Typography paragraph>
+        <CardContent className={classes.expandedContent}>
+          <Typography component={'span'}>Precaution:</Typography>
+          <Typography component={'span'}>
            {precaution}
           </Typography>
         </CardContent>
