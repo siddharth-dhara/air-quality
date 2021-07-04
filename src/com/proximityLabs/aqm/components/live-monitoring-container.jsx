@@ -21,6 +21,10 @@ const useStyles = makeStyles((theme) => ({
     top: '50%',
     alignItems: 'flex-start',
   },
+  container: {
+    margin: '60px 20px 0 0',
+    padding: 0,
+  },
 }));
 
 const getCityRows = (data) =>
@@ -112,9 +116,9 @@ export const LiveMonitoring = ({
           <LegendModal ref={legendRef} />
         </Toolbar>
       </AppBar>
-      <Typography className={classes.title}>
+      <div className={classes.container}>
         {data ? getCityRows(data) : 'No data found'}
-      </Typography>
+      </div>
     </div>
   );
 };

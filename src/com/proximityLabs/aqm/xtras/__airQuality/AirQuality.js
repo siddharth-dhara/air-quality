@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './air-quality.css';
-import Config from '../Config';
+import Config from './Config';
 const conf = new Config();
 
 class AirQuality extends Component {

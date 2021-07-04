@@ -56,7 +56,7 @@ const CityCard = ({
           </Avatar>
         }
         title={city.city}
-        subheader={level.toUpperCase()}
+        subheader={'Air Quality Index is ' + level.toUpperCase()}
       />
       <CardContent>
         <Typography variant="body2" color="textSecondary" component={'span'}>
