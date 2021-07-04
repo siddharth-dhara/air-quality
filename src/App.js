@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
-import AirQuality from './airQuality/AirQuality';
+import { WebSocket } from './com/proximityLabs/aqm/websocket/websocket';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <AirQuality />
+        <WebSocket />
       </div>
     );
   }
