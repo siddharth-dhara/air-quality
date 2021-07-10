@@ -5,24 +5,32 @@ import IconButton from '@material-ui/core/IconButton';
 import MoreIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
+import Typography from '@material-ui/core/Typography';
 import CityCard from './city-card';
 import StatusIndicator from './status-indicator';
 import LegendModal from './legends-modal';
-import { getUpdatedCities } from '../util/condition';
 import { makeStyles } from '@material-ui/core/styles';
 
 const { useRef } = React;
 
 const useStyles = makeStyles((theme) => ({
   appBar: {
+    flexGrow: 1,
     maxHeight: '50px',
+    fontSize: 'calc(10px + 1vmin)',
+    color: 'white',
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+  },
+  title: {
+    flexGrow: 1,
   },
   toolbar: {
-    top: '50%',
-    alignItems: 'flex-start',
+    minHeight: '50px',
   },
   container: {
-    margin: '60px 20px 0 0',
+    margin: '20px 20px 0 0',
     padding: 0,
   },
 }));
@@ -137,8 +145,11 @@ export const LiveMonitoring = ({
 
   return (
     <div className={classes.root}>
-      <AppBar className={classes.appBar} position="absolute">
+      <AppBar className={classes.appBar} position="static">
         <Toolbar className={classes.toolbar}>
+          <Typography variant="h6" className={classes.title}>
+            Air Quality Index(AQI)
+          </Typography>
           <StatusIndicator status={status}/>
           <IconButton edge="end" color="inherit" onClick={handleClick}>
             <MoreIcon />

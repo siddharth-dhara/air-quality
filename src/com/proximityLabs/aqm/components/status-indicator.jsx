@@ -1,19 +1,16 @@
 import React from 'react';
 import { makeStyles, createStyles } from '@material-ui/styles';
 import FiberManualRecordIcon from '@material-ui/icons/FiberManualRecord';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles(() =>
   createStyles({
-    root: {
-      padding: 0,
-      margin: 0,
-    },
     connected: {
-      marginRight: 2,
+      marginRight: '5px',
       color: '#4caf50',
     },
     disconnected: {
-      marginRight: 2,
+      marginRight: '5px',
       color: '#d9182e',
     },
 }));
@@ -24,10 +21,12 @@ const StatusIndicator = ({
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <React.Fragment>
       <FiberManualRecordIcon fontSize="small" className={classes[status]} />
-      Websocket Status is currently {status}
-    </div>
+      <Typography variant="h6">
+        Websocket is {status}
+      </Typography>
+    </React.Fragment>
   );
 };
 
