@@ -46,13 +46,7 @@ const useStyles = makeStyles((theme) =>
       maxHeight: '300px',
       padding: theme.spacing(1),
     },
-    typographyPrecaution: {
-      float: 'left',
-      textAlign: 'left',
-    },
-    typography: {
-      float: 'left',
-    },
+    
     sparklines: {
       width: '820px',
       height: '150px',
@@ -99,7 +93,7 @@ const CityCard = ({
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent className={classes.expandedContent}>
-          <Typography className={classes.typographyPrecaution}
+          <Typography
             variant="body2" component={'span'}>
             {`Precaution: ${precaution}`}
           </Typography>
@@ -108,7 +102,7 @@ const CityCard = ({
             <SparklinesSpots style={{ fill: color }} />
             <SparklinesReferenceLine type="avg" />
           </Sparklines>
-          <Typography className={classes.typography}
+          <Typography
             variant="caption" display="block" color="textSecondary">
             Above Sparkline chart shows live "Air Quality Index" for the city
           </Typography>

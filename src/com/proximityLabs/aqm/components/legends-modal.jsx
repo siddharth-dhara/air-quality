@@ -37,9 +37,13 @@ const LegendModal = forwardRef((props, ref) =>
         onClose={handleClose}
       >
       <DialogTitle>Legend for Air Quality Index(AQI)</DialogTitle>
+      
       <DialogContent>
         <DialogContentText>
           You can review the index and relevant color coding for the given city.
+        </DialogContentText>
+        <DialogContentText>
+          Below color legends may vary from the actual color codes as this is static images provided.
         </DialogContentText>
         <img src={legendImage.img} alt={legendImage.title} />
       </DialogContent>

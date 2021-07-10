@@ -52,6 +52,16 @@ To achieve above features in the stated duration we have used following open sou
 - "@material-ui/icons": "^4.11.2"
 - "react-sparklines": "^1.7.0"
 
+"@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
+    "axios": "^0.18.0",
+    "bootstrap": "^4.1.3",
+    "react": "^16.8.1",
+    "react-dom": "^16.8.1",
+    "react-scripts": "2.0.5",
+    "react-sparklines": "^1.7.0",
+    "react-use-websocket": "^2.7.1"
+
 ### Unused/Extra Code
 
 As per of progressive development there are a few components/files created for POC. Those files are still under `./src/` folder and they are not being used anywhere in the code. We will be removing those files in future releases.
