@@ -13,7 +13,12 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoodIcon from '@material-ui/icons/Mood';
 import MoodBadIcon from '@material-ui/icons/MoodBad';
-import { Sparklines, SparklinesLine, SparklinesReferenceLine } from 'react-sparklines';
+import { 
+  Sparklines,
+  SparklinesLine,
+  SparklinesSpots,
+  SparklinesReferenceLine
+} from 'react-sparklines';
 
 
 const useStyles = makeStyles((theme) =>
@@ -32,8 +37,20 @@ const useStyles = makeStyles((theme) =>
     expandOpen: {
       transform: 'rotate(180deg)',
     },
+    headerContent: {
+      maxHeight: '50px',
+    },
     expandedContent: {
+      ...theme.typography.button,float: 'left',
       maxHeight: '300px',
+      padding: theme.spacing(1),
+    },
+    typographyPrecaution: {
+      float: 'left',
+      textAlign: 'left',
+    },
+    typography: {
+      float: 'left',
     },
   }),
 );
@@ -58,10 +75,10 @@ const CityCard = ({
           </Avatar>
         }
         title={city}
-        subheader={'Air Quality Index is ' + level.toUpperCase()}
+        subheader={'Air Quality Index(AQI) is ' + level.toUpperCase()}
       />
-      <CardContent>
-        <Typography variant="body2" color="textSecondary" component={'span'}>
+      <CardContent className={classes.headerContent}>
+        <Typography variant="subtitle1" color="textSecondary" component={'span'}>
           {healthImplication}
         </Typography>
       </CardContent>
@@ -77,14 +94,19 @@ const CityCard = ({
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent className={classes.expandedContent}>
-          <Typography component={'span'}>Precaution:</Typography>
-          <Typography component={'span'}>
-           {precaution}
+          <Typography className={classes.typographyPrecaution}
+            variant="body2" component={'span'}>
+            {`Precaution: ${precaution}`}
           </Typography>
-          <Sparklines data={aqi} >
-            <SparklinesLine />
+          <Sparklines data={aqi}>
+            <SparklinesLine color={color} />
+            <SparklinesSpots style={{ fill: color }} />
             <SparklinesReferenceLine type="mean" />
           </Sparklines>
+          <Typography className={classes.typography}
+            variant="caption" display="block" color="textSecondary">
+            Above Sparkline chart shows live "Air Quality Index" for the city
+          </Typography>
         </CardContent>
       </Collapse>
     </Card>

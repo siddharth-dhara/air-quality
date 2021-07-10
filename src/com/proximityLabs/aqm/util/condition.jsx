@@ -10,7 +10,7 @@ const getCondition = (aqi) => {
         color: "#009966",
         level: "Good",
         healthImplication: "Air quality is considered satisfactory, and air pollution poses little or no risk",
-        precaution: null
+        precaution: "Avoid pollution & maintain this air quality."
       }
   } else if (aqi > 50 && aqi < 100) {
       return {

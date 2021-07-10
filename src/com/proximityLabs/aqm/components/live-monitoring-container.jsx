@@ -55,24 +55,18 @@ export const LiveMonitoring = ({
 
   useEffect(() => {
     if (cityData && CITY_COUNT > 0) {
-      //setCities(prevCities => new Map([...prevCities, ...cityData]));
-      console.log('# Before update:', cities);
-      console.log('# cityData:', cityData);
       const CITY_DATA = Object.entries(cityData);
-      CITY_DATA.forEach(([key2, val2]) => {
+      CITY_DATA.forEach(([key, val]) => {
         // push the aqi in the list of existing city
-        if(cities.hasOwnProperty(key2)) {
-          const existingCity = {[key2]: [...val2, ...cities[key2]]};
+        if(cities.hasOwnProperty(key)) {
+          const existingCity = {[key]: [...val, ...cities[key]]};
           setCities(prevCities => ({...prevCities, ...existingCity}));
         } else {
           // add the new city as it doesn't exists in the list
-          const newCity = {[key2]: cityData[key2]};
+          const newCity = {[key]: cityData[key]};
           setCities(prevCities => ({...prevCities, ...newCity}));
         }
       });
-
-      console.log('# After update:', cities);
-      console.log('____');
     }
   }, [cityData]);
 
