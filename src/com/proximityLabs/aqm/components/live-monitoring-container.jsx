@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import Typography from '@material-ui/core/Typography';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import CityCard from './city-card';
 import StatusIndicator from './status-indicator';
 import LegendModal from './legends-modal';
+import { getUpdatedCities } from '../util/condition';
 import { makeStyles } from '@material-ui/core/styles';
 
 const { useRef } = React;
@@ -27,20 +27,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const getCityRows = (data) =>
-  JSON.parse(data).map(city => <CityCard key={'key_' + city.city} city={city} />);
-
 export const LiveMonitoring = ({
   status,
-  data,
+  cityData,
   closeWebsocket,
 }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  // const [cities, setCities] = React.useState(cityData);
   const [websocketStatus, setWebsocketStatus] = React.useState('Close');
 
+  const getCityRows = (data) => {
+    let cityMap = [];
+    data.forEach(
+      (aqi, city) => (cityMap.push(<CityCard key={'key_' + city} city={city} aqi={aqi} />))
+    )
+    return cityMap;
+  };
+
+  /*const updateAqi = (cities) => {
+    let updatedCities = cities;
+    return getCityRows(updatedCities);
+  }*/
+
   /**
-   * This will render 2 menu items 
+   * This will render 2 menu items
    * - pause the web socket listening
    * - open modal for legends
    * @returns <Menu> - material-ui menu component
@@ -109,15 +120,15 @@ export const LiveMonitoring = ({
       <AppBar className={classes.appBar} position="absolute">
         <Toolbar className={classes.toolbar}>
           <StatusIndicator status={status}/>
-          <IconButton edge="end" color="inherit">
-            <MoreIcon onClick={handleClick}/>
+          <IconButton edge="end" color="inherit" onClick={handleClick}>
+            <MoreIcon />
             {renderMenu()}
           </IconButton>
           <LegendModal ref={legendRef} />
         </Toolbar>
       </AppBar>
       <div className={classes.container}>
-        {data ? getCityRows(data) : 'No data found'}
+        {cityData && cityData.size > 0 ? getCityRows(cityData) : 'No data found'}
       </div>
     </div>
   );

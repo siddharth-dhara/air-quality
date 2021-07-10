@@ -12,8 +12,8 @@ const { forwardRef, useImperativeHandle } = React;
 const LegendModal = forwardRef((props, ref) =>
 {
   const [open, setOpen] = React.useState(false);
-  const [fullWidth, setFullWidth] = React.useState(true);
-  const [maxWidth, setMaxWidth] = React.useState('md');
+  const [fullWidth] = React.useState(true);
+  const [maxWidth] = React.useState('md');
 
   const handleClose = () => {
     setOpen(false);

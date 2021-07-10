@@ -4,7 +4,7 @@ import LiveMonitoring from '../components/live-monitoring-container';
 
 export const WebSocket = () => {
   // Public API that will receives the response for the air quality
-  const [socketUrl, setSocketUrl] = useState('ws://city-ws.herokuapp.com/');
+  const [socketUrl] = useState('ws://city-ws.herokuapp.com/');
 
   /**
    * Using the 3rd argument this handler closes the Websocket connection.
@@ -30,10 +30,25 @@ export const WebSocket = () => {
 
   const status = connectionStatus === 'Open' ? 'connected' : 'disconnected';
 
+  const cityData = () => {
+    if(lastMessage && lastMessage.data) {
+      /**
+       * converting response from
+       * string->array->object->map
+       * 
+       * Map provides better accessibility for iteration over Object
+       */
+      const data = JSON.parse(lastMessage.data).reduce(
+        (obj, item) => Object.assign(obj, { [item.city]: [item.aqi] }), {});
+      return new Map(Object.entries(data));
+    }
+    return undefined;
+  };
+
   return (
     <LiveMonitoring
       status={status}
-      data={lastMessage ? lastMessage.data : null}
+      cityData={cityData()}
       closeWebsocket={_closeWebsocket}/>
   );
 };

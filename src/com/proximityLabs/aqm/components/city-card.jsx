@@ -13,6 +13,8 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoodIcon from '@material-ui/icons/Mood';
 import MoodBadIcon from '@material-ui/icons/MoodBad';
+import { Sparklines, SparklinesLine, SparklinesReferenceLine } from 'react-sparklines';
+
 
 const useStyles = makeStyles((theme) =>
   createStyles({
@@ -31,17 +33,19 @@ const useStyles = makeStyles((theme) =>
       transform: 'rotate(180deg)',
     },
     expandedContent: {
-      maxHeight: '100px',
+      maxHeight: '300px',
     },
   }),
 );
 
 const CityCard = ({
   city,
+  aqi,
 }) => {
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
-  const { precaution, healthImplication, color, level } = getCondition(city.aqi);
+  const { precaution, healthImplication, color, level } = getCondition(aqi[0]);
+  const aqiHistory = [aqi[0], aqi[0], aqi[0], aqi[0]];
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -55,7 +59,7 @@ const CityCard = ({
             {level ==='Good' ? <MoodIcon /> : <MoodBadIcon />}
           </Avatar>
         }
-        title={city.city}
+        title={city}
         subheader={'Air Quality Index is ' + level.toUpperCase()}
       />
       <CardContent>
@@ -79,6 +83,10 @@ const CityCard = ({
           <Typography component={'span'}>
            {precaution}
           </Typography>
+          <Sparklines data={aqiHistory} >
+            <SparklinesLine />
+            <SparklinesReferenceLine type="mean" />
+          </Sparklines>
         </CardContent>
       </Collapse>
     </Card>

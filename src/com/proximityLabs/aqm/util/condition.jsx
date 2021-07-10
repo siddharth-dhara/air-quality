@@ -1,4 +1,4 @@
-export const getCondition = (aqi) => {
+const getCondition = (aqi) => {
   let classObj = {
       color: null,
       level: null,
@@ -50,4 +50,18 @@ export const getCondition = (aqi) => {
       }
   }
   return classObj;
+};
+
+const getUpdatedCities = (stateCities, newValues) => {
+  return newValues.map(city => {
+    if(!stateCities[city.city]) {
+      stateCities[city.city] = [];
+    }
+    return stateCities[city.city].push({"aqi": city.aqi});
+  });
+};
+
+export {
+  getCondition,
+  getUpdatedCities,
 };
