@@ -106,9 +106,9 @@ export const LiveMonitoring = ({
   const legendRef = useRef();
 
   /**
-     * Handles Mouse Click for opening menu
-     * @param {MouseEvent} event 
-     */
+   * Handles Mouse Click for opening menu
+   * @param {MouseEvent} event 
+   */
   const handleClick = (event) => {
     // open the menu
     setAnchorEl(event.currentTarget);
@@ -120,6 +120,9 @@ export const LiveMonitoring = ({
    * because it is rapidly changing.
    */
   const handleCloseWebsocket = () => {
+    alert('Work in pending');
+    return;
+    // TODO: work is pending here
     // alter the state value(websocketStatus)
     setWebsocketStatus(websocketStatus === 'Close' ? 'Start' : 'Close');
     // close/start the websocket based on 'websocketStatus'
@@ -140,6 +143,8 @@ export const LiveMonitoring = ({
    * Handles opening of the legend modal
    */
   const openLegendModal = () => {
+    // close the menu
+    setAnchorEl(null);
     legendRef.current.openModal();
   };
 
