@@ -22,25 +22,25 @@ Below you will find some information about the project and on how to perform com
 ## About project
 
 This is the sample project for displaying air quality for some specified cities. We are using the API `wss://demos.kaazing.com/echo` to fetch the cities along with the respective AQI(Air Quality Index).
-We are using `websocket` to make connection. In the 2nd phase we are also going to display **sparkline-chart** for better user visibility and more live data visualization and comparison.
+We are using `websocket` to make connection. We are also displaying **sparkline-chart** for better user visibility and more live data visualization and comparison.
 
 ## Features vs Time Taken
 
-It roughly took 5-6 hours to finish the below features in the application. If time permits I am willing to add more features mentioned below in TODO.
+It roughly took 8-10 hours to finish the below features in the application. If time permits I am willing to add more features mentioned below in TODO.
 
 - Display websocket connection status as Close/Connected
 - Render the city wise AQI
 - Use color coding for the better visibility of the AQP 
 - Display Legends
+- Added Sparkline Chart with dynamic color code
 - Feature to close/connect the websocket connection(WIP)
 
 ## TODO
 
 For more better user experience we aiming to add following features in the future releases.
 
-- Use of `spakline-chart` for better visibility and historic comparison for AQI using following API,
-  'https://www.npmjs.com/package/react-sparklines-typescript'
-- Make more robust websocket connection for closing/reconnecting
+- Scaling and alignment for the Sparkline chart
+- Make more robust websocket connection with closing/reconnecting capability
 - Add detailed unit tests for each components
 
 ## Dependencies
@@ -73,12 +73,18 @@ my-app/
     index.html
     favicon.ico
   src/
-    App.css
     App.js
-    App.test.js
-    index.css
     index.js
     logo.svg
+    com
+      proximityLabs
+        aqm
+          components
+          images
+          util
+          websocket
+    __test__
+      App.test.js
 ```
 
 For the project to build, **these files must exist with exact filenames**:
@@ -110,6 +116,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
+
+### `npm test`
+
+Launches the test runner in the interactive watch mode.<br>
+See the section about [running tests](#running-tests) for more information.
 
 ## Supported Browsers
 

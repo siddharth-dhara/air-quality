@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from "prop-types";
 import { makeStyles, createStyles } from '@material-ui/core/styles';
 import clsx from 'clsx';
 import { getCondition } from '../util/condition';
@@ -52,6 +53,10 @@ const useStyles = makeStyles((theme) =>
     typography: {
       float: 'left',
     },
+    sparklines: {
+      width: '820px',
+      height: '150px',
+    }
   }),
 );
 
@@ -98,10 +103,10 @@ const CityCard = ({
             variant="body2" component={'span'}>
             {`Precaution: ${precaution}`}
           </Typography>
-          <Sparklines data={aqi}>
+          <Sparklines data={aqi} width={600} height={100}>
             <SparklinesLine color={color} />
             <SparklinesSpots style={{ fill: color }} />
-            <SparklinesReferenceLine type="mean" />
+            <SparklinesReferenceLine type="avg" />
           </Sparklines>
           <Typography className={classes.typography}
             variant="caption" display="block" color="textSecondary">
@@ -111,6 +116,15 @@ const CityCard = ({
       </Collapse>
     </Card>
   );
+};
+
+CityCard.propTypes = {
+  city: PropTypes.string,
+  aqi: PropTypes.arrayOf(PropTypes.number).isRequired,
+};
+
+CityCard.defaultProps = {
+  city: "",
 };
 
 export default CityCard;

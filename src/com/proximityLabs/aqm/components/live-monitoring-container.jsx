@@ -38,15 +38,15 @@ export const LiveMonitoring = ({
   const [websocketStatus, setWebsocketStatus] = React.useState('Close');
   const CITY_COUNT = cityData ? Object.keys(cityData).length : 0;
 
+  /**
+   * This will simply return the list of CityCard component
+   * via iterating over CityData object.
+   * 
+   * @param {Object<Array.CityCard />} data 
+   * @returns - array<CityCard />
+   */
   const getCityRows = (data) => {
     let cityMap = [];
-    /**
-     * if we use Map then change the following code
-     */
-    /*data.forEach(
-      (aqi, city) => (cityMap.push(<CityCard key={'key_' + city} city={city} aqi={aqi} />))
-    )*/
-
     Object.entries(data).forEach(([city, aqi]) =>
       (cityMap.push(<CityCard key={'key_' + city} city={city} aqi={aqi} />))
     )
