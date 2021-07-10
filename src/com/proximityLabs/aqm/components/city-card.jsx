@@ -45,8 +45,6 @@ const CityCard = ({
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
   const { precaution, healthImplication, color, level } = getCondition(aqi[0]);
-  const aqiHistory = [aqi[0], aqi[0], aqi[0], aqi[0]];
-
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -83,7 +81,7 @@ const CityCard = ({
           <Typography component={'span'}>
            {precaution}
           </Typography>
-          <Sparklines data={aqiHistory} >
+          <Sparklines data={aqi} >
             <SparklinesLine />
             <SparklinesReferenceLine type="mean" />
           </Sparklines>

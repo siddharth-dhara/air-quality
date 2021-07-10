@@ -40,7 +40,8 @@ export const WebSocket = () => {
        */
       const data = JSON.parse(lastMessage.data).reduce(
         (obj, item) => Object.assign(obj, { [item.city]: [item.aqi] }), {});
-      return new Map(Object.entries(data));
+      //return new Map(Object.entries(data));
+      return data;
     }
     return undefined;
   };

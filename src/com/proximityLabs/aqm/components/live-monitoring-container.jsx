@@ -34,21 +34,47 @@ export const LiveMonitoring = ({
 }) => {
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
-  // const [cities, setCities] = React.useState(cityData);
+  const [cities, setCities] = React.useState({});
   const [websocketStatus, setWebsocketStatus] = React.useState('Close');
+  const CITY_COUNT = cityData ? Object.keys(cityData).length : 0;
 
   const getCityRows = (data) => {
     let cityMap = [];
-    data.forEach(
+    /**
+     * if we use Map then change the following code
+     */
+    /*data.forEach(
       (aqi, city) => (cityMap.push(<CityCard key={'key_' + city} city={city} aqi={aqi} />))
+    )*/
+
+    Object.entries(data).forEach(([city, aqi]) =>
+      (cityMap.push(<CityCard key={'key_' + city} city={city} aqi={aqi} />))
     )
     return cityMap;
   };
 
-  /*const updateAqi = (cities) => {
-    let updatedCities = cities;
-    return getCityRows(updatedCities);
-  }*/
+  useEffect(() => {
+    if (cityData && CITY_COUNT > 0) {
+      //setCities(prevCities => new Map([...prevCities, ...cityData]));
+      console.log('# Before update:', cities);
+      console.log('# cityData:', cityData);
+      const CITY_DATA = Object.entries(cityData);
+      CITY_DATA.forEach(([key2, val2]) => {
+        // push the aqi in the list of existing city
+        if(cities.hasOwnProperty(key2)) {
+          const existingCity = {[key2]: [...val2, ...cities[key2]]};
+          setCities(prevCities => ({...prevCities, ...existingCity}));
+        } else {
+          // add the new city as it doesn't exists in the list
+          const newCity = {[key2]: cityData[key2]};
+          setCities(prevCities => ({...prevCities, ...newCity}));
+        }
+      });
+
+      console.log('# After update:', cities);
+      console.log('____');
+    }
+  }, [cityData]);
 
   /**
    * This will render 2 menu items
@@ -128,7 +154,7 @@ export const LiveMonitoring = ({
         </Toolbar>
       </AppBar>
       <div className={classes.container}>
-        {cityData && cityData.size > 0 ? getCityRows(cityData) : 'No data found'}
+        {cityData && CITY_COUNT > 0 ? getCityRows(cities) : 'No data found'}
       </div>
     </div>
   );
